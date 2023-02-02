@@ -28,5 +28,5 @@ python benchmark_models.py --data_dir #path to the ImageNet validation folder# -
 ```
 For example, to evaluate two models, resnet18 and resnet34:
 ```example
-python benchmark_models.py --data_dir #path to the ImageNet validation folder# -b 32 --models resnet18 resnet34
+python benchmark_models.py --data_dir #path to the ImageNet validation folder# -b 128 --models resnet18 resnet34
 ```
