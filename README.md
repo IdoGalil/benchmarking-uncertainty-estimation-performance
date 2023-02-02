@@ -22,7 +22,7 @@ To use it, simply run:
 ```
 python benchmark_models.py --data_dir #path to the ImageNet validation folder# -b #batchsize# --models #models to evaluate#
 ```
-For example, to evaluate:
+For example, to evaluate two models, resnet18 and resnet34:
 ```example
 python benchmark_models.py --data_dir #path to the ImageNet validation folder# -b 32 --models resnet18 resnet34
 ```
