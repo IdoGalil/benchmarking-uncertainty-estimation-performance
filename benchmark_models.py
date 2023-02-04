@@ -36,13 +36,14 @@ def create_model_and_transforms(model_name):
 
 
 def metrics_calculations(samples_certainties, num_bins_ece=15):
-    # TODO: Write in documentaion we assume certainties are probabilities!!!!
+    # Note: we assume here the certainty scores in samples_certainties are probabilities.
     results = {}
     results['Accuracy'] = (samples_certainties[:,1].sum() / samples_certainties.shape[0]).item() * 100
     results['AUROC'] = AUROC(samples_certainties)
     results['Coverage_for_Accuracy_99'] = coverage_for_desired_accuracy(samples_certainties, accuracy=0.99, start_index=200)
     ece, mce = ECE_calc(samples_certainties, num_bins=num_bins_ece)
     results[f'ECE_{num_bins_ece}'] = ece
+    results['AURC'] = AURC_calc(samples_certainties)
     return results
 
 
@@ -108,8 +109,9 @@ def extract_temperature_scaled_metrics(model, transform, valid_size=5000, model_
     return model_results_TS
 
 
-def models_comparison(models_names: list, file_name='./results/ID/models_comparison.csv'):
-    headers = ['Architecture', 'Accuracy', 'AUROC', 'AUROC_TS', 'ECE_15', 'ECE_15_TS', 'Coverage_for_Accuracy_99', 'Coverage_for_Accuracy_99_TS']
+def models_comparison(models_names: list, file_name='./results.csv'):
+    headers = ['Architecture', 'Accuracy', 'AUROC', 'AUROC_TS', 'ECE_15', 'ECE_15_TS', 'Coverage_for_Accuracy_99',
+               'Coverage_for_Accuracy_99_TS', 'AURC', 'AURC_TS']
     logger = log_utils.Logger(file_name=file_name, headers=headers, overwrite=False)
     for model_name in models_names:
         model, transform = create_model_and_transforms(model_name)
@@ -122,6 +124,9 @@ def models_comparison(models_names: list, file_name='./results/ID/models_compari
         model_results['Architecture'] = model_name
         # Log results
         logger.log(model_results)
+    x = 1
+    # for key, value in zip(model_results.keys(), model_results.values()):
+
 
 
 if __name__ == '__main__':

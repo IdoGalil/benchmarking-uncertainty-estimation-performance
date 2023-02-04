@@ -21,6 +21,7 @@ class Logger:
     def log(self, msg_dict):
         with open(self.log_file_name, 'a') as f:
             msg = ''
+            print_msg = ''
             for header in self.headers:
                 if header not in msg_dict:
                     print(f'WARNING {header} was not logged')
@@ -29,10 +30,13 @@ class Logger:
                     cell_content = msg_dict[header]
                 if type(cell_content) is float:
                     msg += f'{cell_content: .5f},'
+                    print_msg += f'{header}: {cell_content: .5f}  '
                 else:
                     msg += f'{cell_content},'
+                    print_msg += f'{header}: {cell_content}  '
 
-            print(msg)
+            # print(msg)
+            print(print_msg)
             f.write(f'{msg[:-1]}\n')
 
     def log_msg(self, msg):
