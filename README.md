@@ -20,7 +20,7 @@ This will print and create a csv file with the following uncertainty metrics:
 
 4. AURC (Area Under the Risk-Coverage curve ,Geifman et al., 2018). In essence, this metric is equal the mean selective risk over all possible coverage values.
 
-All models are also evaluated after using 'Temperature Scaling', which tends to improve the performance over all metrics.
+All models are also evaluated when using the post-training technique of 'Temperature Scaling', which, as we show in the paper, tends to improve the performance over all metrics.
 
 
 To use it, simply run:
