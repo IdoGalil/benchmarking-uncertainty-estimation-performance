@@ -1,10 +1,6 @@
 import sys
-import torch
-
 from utils import log_utils
-import numpy as np
 import sklearn.model_selection
-import csv
 import tqdm
 from torch.utils.data.sampler import SubsetRandomSampler
 import torchvision
@@ -26,9 +22,11 @@ parser.add_argument('-b', '--batch-size', default=64, type=int,
 
 parser.add_argument('--models', nargs='+', type=str, help='a list of model names available on the timm repo')
 
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
 
 def create_model_and_transforms(model_name):
-    model = timm.create_model(model_name, pretrained=True).eval().cuda()
+    model = timm.create_model(model_name, pretrained=True).eval().to(device)
     # Creating the model specific data transformation
     config = resolve_data_config({}, model=model)
     transform = create_transform(**config)
@@ -62,9 +60,8 @@ def extract_model_info(model, dataloader, pbar_name='Extracting data for model')
             dl_iter = iter(dataloader)
             for batch_idx in range(num_batches):
                 x, y = next(dl_iter)
-                x = x.cuda()
-                y = y.cuda()
-
+                x = x.to(device)
+                y = y.to(device)
                 y_scores = model.forward(x)
                 y_scores = torch.softmax(y_scores, dim=1)
                 y_pred = torch.max(y_scores, dim=1)
@@ -124,8 +121,6 @@ def models_comparison(models_names: list, file_name='./results.csv'):
         model_results['Architecture'] = model_name
         # Log results
         logger.log(model_results)
-    x = 1
-    # for key, value in zip(model_results.keys(), model_results.values()):
 
 
 
