@@ -35,7 +35,7 @@ python benchmark_models.py --data_dir #path to the ImageNet validation folder# -
 
 The results will be printed and saved to a csv
 
-![image](https://user-images.githubusercontent.com/33372318/218324391-aff682d6-dc14-4570-9a24-a8fbb799064e.png)
+![image](https://user-images.githubusercontent.com/33372318/218324447-6f6ae1d8-229b-48ee-8be7-00d8ec088d73.png)
 
 
 
