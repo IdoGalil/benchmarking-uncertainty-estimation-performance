@@ -33,10 +33,8 @@ For example, to evaluate two models, resnet18 and resnet34:
 python benchmark_models.py --data_dir #path to the ImageNet validation folder# -b 128 --models resnet18 resnet34
 ```
 
-The results will be printed and saved to a csv:
-Architecture	Accuracy	AUROC	AUROC_TS	ECE_15	ECE_15_TS
-adv_inception_v3	77.576	0.852231065	0.858744625	0.023476746	0.038017511
-![image](https://user-images.githubusercontent.com/33372318/218322170-b0b90c6f-4085-4c98-86be-974bff3dc361.png)
+The results will be printed and saved to a csv
+![image](https://user-images.githubusercontent.com/33372318/218324391-aff682d6-dc14-4570-9a24-a8fbb799064e.png)
 
 
 
